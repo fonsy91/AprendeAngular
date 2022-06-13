@@ -38,41 +38,54 @@
       <img id="img2" src="../assets/imagen2.png">  
     </p>
     <p>
-    A continuacion vemos el modulo raiz app.module.ts y dentro se define el componente principal a cargar AppComponet. 
-    En la parte de declarations se importaran o agregaran los componentes que van a existir en este modulo principal, en 
-    la parte de imports se agregaran las librerias que queramos importar de Angular junto con el AppRoutingModule como podemos 
-    ver en la imagen de abajo a la izquierda, en la de la derecha vemos el componente AppComponent el cual va dentro del raiz este 
-    componente esta compuesto por un selector 'app-root', el templateUrl que es el html de este mismo componente junto con el 
-    styleUrls que es la pagina de estilos de este componente.
-    El decorador de este componente lo identificamos con @Component. Se puede observar que hay una parte llamada export class
-    AppComponent vemos que hay una propiedad title la cual usamos despues en el documento del html del componente se pueden 
-    crear mas propiedades 
-  </p>
+      A continuacion vemos el modulo raiz app.module.ts y dentro se define el componente principal a cargar AppComponet. 
+      En la parte de declarations se importaran o agregaran los componentes que van a existir en este modulo principal, en 
+      la parte de imports se agregaran las librerias que queramos importar de Angular junto con el AppRoutingModule como podemos 
+      ver en la imagen de abajo a la izquierda, en la de la derecha vemos el componente AppComponent el cual va dentro del raiz este 
+      componente esta compuesto por un selector 'app-root', el templateUrl que es el html de este mismo componente junto con el 
+      styleUrls que es la pagina de estilos de este componente.
+      El decorador de este componente lo identificamos con @Component. Se puede observar que hay una parte llamada export class
+      AppComponent vemos que hay una propiedad title la cual usamos despues en el documento del html del componente se pueden 
+      crear mas propiedades 
+    </p>
   <div>
     <img id="img3" src="../assets/imagen3.png">
     <img id="img4" src="../assets/imagen4.png">
   </div>
-  <h3>2. COMPONENTES EN ANGULAR.</h3>
-  <p>
-    Los componentes se pueden crear manualmente o automaticamente a partir del CLI. Una vez que creas
-    un componente es necesario registrarlo en la aplicacion dentro del archivo app.module.ts agregamos
-    dentro del apartado declarations el nombre de la clase del nuevo componente ademas de importar 
-    el componente con import.
-  </p>
-  <!--Agregamos el componente Empleados-->
-  <app-empleados></app-empleados>
-  <!--Seguimos con nuestro componente principal-->
-  <p>
-    Muchas veces cuando creamos un componente Angular nos crea los tres archivos primordiales html, ts y css pero algunas 
-    veces el codigo del ts y css son muy pequeños y no queremos esos archivos para algo tan minusculo es por ello
-    que podemos hacerlo inline para ello debemos ir al archivo ts del componente omitir la linea de css o ts del @Componet 
-    y cambiamos el codigo styleUrls: ['./empleado.component.css'] por styles:[""] igual que en la programacion web que puedes 
-    hacer estilos en la misma pagina o en un archivo aparte y de la misma manera lo hariamos para la parte del html. Si quieres 
-    que al crear un componente mediante CLI haga todo esto que acabamos de comentar se deberia crear de la siguiente manera:
-    ng g c nombreComponeten -s -t
-  </p>
-  <app-empleado></app-empleado>
-  <app-empleado></app-empleado>
+    <h3>2. COMPONENTES EN ANGULAR.</h3>
+    <p>
+      Los componentes se pueden crear manualmente o automaticamente a partir del CLI. Una vez que creas
+      un componente es necesario registrarlo en la aplicacion dentro del archivo app.module.ts agregamos
+      dentro del apartado declarations el nombre de la clase del nuevo componente ademas de importar 
+      el componente con import.
+    </p>
+    <!--Agregamos el componente Empleados-->
+    <!--<app-empleados></app-empleados>-->
+    <!--Seguimos con nuestro componente principal-->
+    <p>
+      Muchas veces cuando creamos un componente Angular nos crea los tres archivos primordiales html, ts y css pero algunas 
+      veces el codigo del ts y css son muy pequeños y no queremos esos archivos para algo tan minusculo es por ello
+      que podemos hacerlo inline para ello debemos ir al archivo ts del componente omitir la linea de css o ts del @Componet 
+      y cambiamos el codigo styleUrls: ['./empleado.component.css'] por styles:[""] igual que en la programacion web que puedes 
+      hacer estilos en la misma pagina o en un archivo aparte y de la misma manera lo hariamos para la parte del html. Si quieres 
+      que al crear un componente mediante CLI haga todo esto que acabamos de comentar se deberia crear de la siguiente manera:
+      ng g c nombreComponeten -s -t
+    </p>
+    <!--
+    <app-empleado></app-empleado>
+    <app-empleado></app-empleado>
+    -->
+  <div>
+    <h3>3. INTERPOLACIÓN.</h3>
+    <p>
+      Cuando hablamos de interpolacion nos referimos a la incrustacion de expresiones en el docuemnto html a partir de las llaves dobles <code>{{</code><code>}}</code>
+      en la interpolacion tambien podemos interactuar con las variables que mostramos en el caso de los int podemos sumar, restar etc... todo tipo de operaciones
+      ,expresiones y operadores que existen en typescript. Los campos a los que accedemos tambien pueden estar protegidos en el caso de que no queramos que se accedan 
+      desde otras clases como ocurre en otro lenguajes orientados a objetos, ademas tambien podemos usar el operador ternario '?' para realizar una condicion 
+      de la siguiente manera condicion ? valor si verdad: si falso 
+    </p>
+    <app-empleados></app-empleados>
+  </div>
 
 
 </div>
