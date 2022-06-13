@@ -20,6 +20,8 @@
       <li>Estructura y modificacion de la App.</li>
       <li>Componentes.</li>
       <li>Iterpolación.</li>
+      <li>Propiedad Binding</li>
+      <li>Event Binding</li>
       <li>...</li>
     </ol>
   </div>
@@ -82,9 +84,45 @@
       en la interpolacion tambien podemos interactuar con las variables que mostramos en el caso de los int podemos sumar, restar etc... todo tipo de operaciones
       ,expresiones y operadores que existen en typescript. Los campos a los que accedemos tambien pueden estar protegidos en el caso de que no queramos que se accedan 
       desde otras clases como ocurre en otro lenguajes orientados a objetos, ademas tambien podemos usar el operador ternario '?' para realizar una condicion 
-      de la siguiente manera condicion ? valor si verdad: si falso 
+      de la siguiente manera condicion ? valor si verdad: si falso <br> <code>{{<var>edad</var><=18 ? "Menor de edad":"Mayor de edad"}}</code> 
     </p>
     <app-empleados></app-empleados>
+  </div>
+  <div>
+    <h3>4. PROPERTY BINDING.</h3>
+    <p>
+      Binding es poder hacer una union entre una propiedad de la parte logica con un elemento del html ya sea un cuadro de texto, una frase, 
+      un input, un boton etc.. en este caso tenemos deshabilitado el campo de introducir una empresa con la propiedad de disabled si creamos una 
+      variable como pude ser <code>habilitaCuadro=true;</code> en nuestra parte logica y queremos cambiar indistintamente de true a false esta propiedad dependiendo
+      de los factores que sean como por ejemplo que algunos usuarios no tienen acceso a ese campo pues mediante un if y esta propiedad podemos hacer 
+      que se habilite o no, en el html se realiza de la siguiente manera: <code>[disabled]="habilitaCuadro"</code>, En el aso del boton esta deshabilitado ya que 
+      hemos usado esta misma tecnica para cancelarlo por el momento. 
+    </p>
+    <div>
+      <img id="img5" src="../assets/imagen5.png">
+    </div>
+    <br>
+    <p>
+      Otro ejemplo con otro elemento de html un checkbox con esto haremos que cuando arranque la aplicacion este elemento este o no este activado 
+      dependiendo de la funcion <code>cambiaCheck()</code> si la tenemos a true o a false implementada en la el .ts. Podemos ver si esto es cierto o no 
+      mirando el checkbox que se situa al final de Empleados de la Empresa en el apartado registrado 
+    </p>
+  </div>
+  <div>
+    <h3>5. EVENT BINDING</h3>
+    <p>
+      Event Binding es como el apartado anterior pero en ambos sentidos desde el componente html al .ts y viceversa para ver un primer ejemplo 
+      realizaremos un ejemplo sencillo que al pulsar el checkbox aparezca una ventana emergente indicandonos que un usuario se ha registrado, esto 
+      servira de ejemplo para poder entender como funciona el event binding para ello realizaremos un funcion que muestre esa ventana emergente. 
+      Tambien podemos capturar el objeto event que ocurre y que nadie ve ($event) pasandoselo a la funcion y poder tratarlo en .ts  
+    </p>
+    <h4>MAS PRACTICAS CON EVENT BINDING</h4>
+    <p>
+      Aqui mostraremos algunas practicas mas sobre eventos binding a partir de la documentación de angular y lo existente en internet algunas 
+      paginas donde podemos ver los eventos y ejemplos practicos serian las siguientes: <a href="https://www.w3schools.com/jsref/dom_obj_event.asp" target="_blank">Eventos1,</a>
+      <a href="http://www.w3bai.com/es/angular/angular_events.html" target="_blank"> Eventos2</a>
+    </p>
+    
   </div>
 
 

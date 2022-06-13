@@ -4,5 +4,16 @@
     <p>Edad: {{getEdad()}}</p>
     <p>Mayor de Edad: {{mayor(getEdad())}}</p>
     <p>Mayor de Edad forma dos: {{edad2<=18 ? "Menor de edad":"Mayor de edad"}}</p>
-    <p>Empresa: {{empresa}}</p>
+    <p>Empresa: {{empresa.value}}</p>
+</div>
+<div>
+    Introduce la empresa: <input type="text" #empresa (keyup)="0" [disabled]="habilitaCuadro">
+    <input id="btnMod" type="button" value="Modificar" (click)="llamaEmpresa(empresa.value)" [disabled]="habilitaBoton">
+    <p>Si quieres que al introducir el nombre se ponga de forma automatica usamos el evento Keyup</p>
+    {{textoRegistro}}
+    <br>
+    Registrado: <input id="registro" value="si" name="registro" type="radio" [checked]="habilitacheckbox" (click)="setVentana($event)"><br>
+    No Registrado: <input type="radio" value="no" name="registro" (click)="setVentana($event)">
+    <!--La funcion cambiaCheck() modifica el valor del checkbox de activado a no activado-->
+    {{cambiaCheck()}}
 </div>

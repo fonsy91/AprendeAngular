@@ -15,5 +15,4 @@ export class AppComponent {
     console.log("Hola tio");
   }
  
-  
 }
