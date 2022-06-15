@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
+//Creado por mi para las rutas ya se vera mas adelante 
 import { AppRoutingModule } from './app-routing.module';
 //Componente principal 
 import { AppComponent } from './app.component';
-//Componentes que he creados por mi
+//Componentes creados por mi
 import { EmpleadosComponent } from './Empleados/empleados.component';
 import { EmpleadoComponent } from './empleado/empleado.component';
+
 
 @NgModule({
   declarations: [
@@ -14,6 +17,7 @@ import { EmpleadoComponent } from './empleado/empleado.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [],

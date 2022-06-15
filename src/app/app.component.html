@@ -9,7 +9,7 @@
 <body>
   <h1>APRENDE ANGULAR</h1>
   <div>
-    <h3>0. INTRODUCCION</h3>
+    <h4>0. INTRODUCCION</h4>
     <p>
     En este curso de Angular veremos desde los conceptos mas basicos hasta un nivel avanzado. Este curso ha sido difundido desde 
     la siguiente pagina web <a href="https://www.youtube.com/watch?v=FfqLD0Yoxu0&list=PLU8oAlHdN5BnNAe8zXnuBNzKID39DUwcO&index=3&ab_channel=pildorasinformaticas" target="_blank"> Curso Angular</a> 
@@ -22,11 +22,13 @@
       <li>Iterpolación.</li>
       <li>Propiedad Binding</li>
       <li>Event Binding</li>
+      <li>Mini Calculadora</li>
       <li>...</li>
     </ol>
+    <br>
   </div>
   <div>
-    <h3>1. ESTRUCTURA Y MODIFICACION DE LA APP.</h3>
+    <h4>1. ESTRUCTURA Y MODIFICACION DE LA APP.</h4>
     <p>
       La diferencia entre una pagina web convencional y una single page application (SPA) estriba en que la primera esta haciendo peticiones 
       al servidor continuamente cada vez que queremos ver una imagen se le hace una peticion al servidor y este nos devuelve otro html con esa
@@ -50,11 +52,14 @@
       AppComponent vemos que hay una propiedad title la cual usamos despues en el documento del html del componente se pueden 
       crear mas propiedades 
     </p>
+    <br>
+  </div>
   <div>
     <img id="img3" src="../assets/imagen3.png">
     <img id="img4" src="../assets/imagen4.png">
   </div>
-    <h3>2. COMPONENTES EN ANGULAR.</h3>
+  <div>
+    <h4>2. COMPONENTES EN ANGULAR.</h4>
     <p>
       Los componentes se pueden crear manualmente o automaticamente a partir del CLI. Una vez que creas
       un componente es necesario registrarlo en la aplicacion dentro del archivo app.module.ts agregamos
@@ -77,8 +82,10 @@
     <app-empleado></app-empleado>
     <app-empleado></app-empleado>
     -->
+    <br>
+  </div>
   <div>
-    <h3>3. INTERPOLACIÓN.</h3>
+    <h4>3. INTERPOLACIÓN.</h4>
     <p>
       Cuando hablamos de interpolacion nos referimos a la incrustacion de expresiones en el docuemnto html a partir de las llaves dobles <code>{{</code><code>}}</code>
       en la interpolacion tambien podemos interactuar con las variables que mostramos en el caso de los int podemos sumar, restar etc... todo tipo de operaciones
@@ -87,9 +94,10 @@
       de la siguiente manera condicion ? valor si verdad: si falso <br> <code>{{<var>edad</var><=18 ? "Menor de edad":"Mayor de edad"}}</code> 
     </p>
     <app-empleados></app-empleados>
+    <br>
   </div>
   <div>
-    <h3>4. PROPERTY BINDING.</h3>
+    <h4>4. PROPERTY BINDING.</h4>
     <p>
       Binding es poder hacer una union entre una propiedad de la parte logica con un elemento del html ya sea un cuadro de texto, una frase, 
       un input, un boton etc.. en este caso tenemos deshabilitado el campo de introducir una empresa con la propiedad de disabled si creamos una 
@@ -107,26 +115,58 @@
       dependiendo de la funcion <code>cambiaCheck()</code> si la tenemos a true o a false implementada en la el .ts. Podemos ver si esto es cierto o no 
       mirando el checkbox que se situa al final de Empleados de la Empresa en el apartado registrado 
     </p>
+    <br>
   </div>
   <div>
-    <h3>5. EVENT BINDING</h3>
+    <h4>5. EVENT BINDING</h4>
     <p>
       Event Binding es como el apartado anterior pero en ambos sentidos desde el componente html al .ts y viceversa para ver un primer ejemplo 
       realizaremos un ejemplo sencillo que al pulsar el checkbox aparezca una ventana emergente indicandonos que un usuario se ha registrado, esto 
       servira de ejemplo para poder entender como funciona el event binding para ello realizaremos un funcion que muestre esa ventana emergente. 
       Tambien podemos capturar el objeto event que ocurre y que nadie ve ($event) pasandoselo a la funcion y poder tratarlo en .ts  
     </p>
-    <h4>MAS PRACTICAS CON EVENT BINDING</h4>
+    <h6>MAS PRACTICAS CON EVENT BINDING</h6>
     <p>
       Aqui mostraremos algunas practicas mas sobre eventos binding a partir de la documentación de angular y lo existente en internet algunas 
       paginas donde podemos ver los eventos y ejemplos practicos serian las siguientes: <a href="https://www.w3schools.com/jsref/dom_obj_event.asp" target="_blank">Eventos1,</a>
       <a href="http://www.w3bai.com/es/angular/angular_events.html" target="_blank"> Eventos2</a>
     </p>
-    
+    <br>
   </div>
-
-
-</div>
+  <div>
+    <h4>5. BINDING BIDIRECCIONAL</h4>
+    <p>
+      Como vimos anteriormente en las explicaciones de la propiedad binding en ese caso cuando cambiabas una propiedad en el .ts esta se modificaba 
+      en el html esto implicaba una sola direccion, y en el event binding se hacia lo mismo pero atrapando el evento y a traves de una funcion 
+      cuando el usuario interactuaba con la aplicacion o el tempalte eso tenia reflejo en el .ts ejecutandose dicha funcion en este caso el flujo es
+      contrario al del binding, cuando el flujo va tanto de un lado para otro se llama binding bidireccional o two way binding, esto nos permite 
+      actualizaciones continuas es decir modificar cosas en nel .ts a partir de accione en html y estas .ts se modifican al instante en el html otra vez.
+      Para poder hacer todo esto necesitamos: la directiva ngModel y el uso de Banana in Box que es una sintaxis si recordais para el property banding 
+      usabamos [] para el flujo .ts hacia html y para el event binding () flujo de html a .ts, para este caso que queremos que sea bidireccional tendremos 
+      que suar ambos simbolos [()].
+      El ejemplo ilustrativo se veria en la parte superior donde usamos todos los tipos de bindings. Como podemos ver en el campo de testo aparece 
+      el nombre de Google esto es debido a que al usar el ngModel <code>[(ngModel)]="empresa2" </code> viaja del .ts al html y cuando escribo ocurre de forma diferente.
+      Para poder usar todo esto en angular es necesario importarlo en el modulo principal app.module.ts en el apartado de imports FormaModule.  
+    </p>
+    <br>
+  </div>
+  <div>
+    <h4>6. PRACTICA MINI CALCULADORA</h4>
+    <p>
+      Esta aplicacion realizara calculos basicos como la suma la resta, existen dos cuadros de texto para mabos valores a operar, tambien exitiran botones 
+      de operacion el resultado lo mostramos por pantalla, ademas esta aplicacion usara Binding bidireccional.
+    </p>
+    <form action="">
+      <!--Hay que especificar el name en el input junto con el ngMmodel para que haya ambas direcciones-->
+      Numero 1: <input type="number" [(ngModel)]="numero1" name="numero1"><br><br>
+      Numero 2: <input type="number" [(ngModel)]="numero2" name="numero2"><br><br>
+      Resultado: {{resultado}} <br><br>
+      <!--Para poder enviar la informacion de este formulario un input submit-->
+      <input id="inputSuma" type="submit" value="sumar" (click)="sumar()" class="btn btn-primary">
+      <input id="inputResta" type="submit" value="restar" (click)="restar()" class="btn btn-primary">
+    </form>
+    <br>
+  </div>
 
 </body>
 </html>

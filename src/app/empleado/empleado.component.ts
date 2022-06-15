@@ -22,7 +22,8 @@ export class EmpleadoComponent implements OnInit {
   apellido="Casado";
   private edad=31;
   edad2=31;
-  empresa="Quality Afronta Solutions";
+  empresa="";
+  empresa2="Google";
 
   //Propiedades Binding 
   //Ahora hacemos una union o puente entre esta propiedad y la de disable en el docuemnto html 
@@ -42,6 +43,13 @@ export class EmpleadoComponent implements OnInit {
 
   llamaEmpresa(value:string){
 
+  }
+
+  cambiaEmpresa(event:Event){
+    //casteamos el objeto HTML y cogemos el valor que introduce el usuario 
+    //despues lo malmacenamos en la variable empresa de este modo hemos cogido 
+    //un valor introducido por el usaurio y lo hemos guardado en una variable 
+    this.empresa2=(<HTMLInputElement>event.target).value;
   }
 
   //Funcion que cambia el check 

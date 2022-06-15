@@ -16,4 +16,12 @@
     No Registrado: <input type="radio" value="no" name="registro" (click)="setVentana($event)">
     <!--La funcion cambiaCheck() modifica el valor del checkbox de activado a no activado-->
     {{cambiaCheck()}}
+
+    <br><br>
+    <h5>Binding bidireccional:</h5>
+</div>
+<div>
+    Empresa: {{empresa2}} <br>
+    <!--Capturamos el evento y lo enviamos a la funcion del .ts-->
+    Introduce Empresa: <input type="text" [(ngModel)]="empresa2">
 </div>
