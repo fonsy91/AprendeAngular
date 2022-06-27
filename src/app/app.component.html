@@ -23,6 +23,7 @@
       <li>Propiedad Binding</li>
       <li>Event Binding</li>
       <li>Mini Calculadora</li>
+      <li>Directivas</li>
       <li>...</li>
     </ol>
     <br>
@@ -57,6 +58,7 @@
   <div>
     <img id="img3" src="../assets/imagen3.png">
     <img id="img4" src="../assets/imagen4.png">
+    <br><br>
   </div>
   <div>
     <h4>2. COMPONENTES EN ANGULAR.</h4>
@@ -151,11 +153,17 @@
     <br>
   </div>
   <div>
-    <h4>6. PRACTICA MINI CALCULADORA</h4>
+    <h4>6. MINI CALCULADORA</h4>
     <p>
       Esta aplicacion realizara calculos basicos como la suma la resta, existen dos cuadros de texto para mabos valores a operar, tambien exitiran botones 
-      de operacion el resultado lo mostramos por pantalla, ademas esta aplicacion usara Binding bidireccional.
+      de operacion el resultado lo mostramos por pantalla, ademas esta aplicacion usara Binding bidireccional. Para el uso de bootstrap en la aplicacion en este 
+      caso no lo hemos instalado en el proyecto ha sido introducido via CDN insertando las isguientes lineas en el index.html del proyecto: 
     </p>
+    <textarea name="" id="" cols="190" rows="2.5">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    </textarea>
+    <br><br>
     <form action="">
       <!--Hay que especificar el name en el input junto con el ngMmodel para que haya ambas direcciones-->
       Numero 1: <input type="number" [(ngModel)]="numero1" name="numero1"><br><br>
@@ -165,6 +173,112 @@
       <input id="inputSuma" type="submit" value="sumar" (click)="sumar()" class="btn btn-primary">
       <input id="inputResta" type="submit" value="restar" (click)="restar()" class="btn btn-primary">
     </form>
+    <br>
+  </div>
+  <div>
+    <h4>7. DIRECTIVAS</h4>
+    <p>
+      Son elementos que se aplican a etiquetas HTML y añaden funcionalidad, sirven para modificar la estructura del DOM (document Objet model)
+      podras agreagr y quitar elementos de nuestra pagina web agreagr o qutar parafos, imagenes depeniendo de ciertas acciones que vayan 
+      haciendo los usuarios hay tres tipos de directivas en angular pueden ser:
+    </p>
+    <ul>
+      <li>Atributo
+        <ul>
+          <li>ngClass</li>
+          <li>ngStyle</li>
+          <li>ngModel</li>
+        </ul>
+      </li>
+      <li>Estructural 
+        <ul>
+          <li>ngIf</li>
+          <li>ngFor</li>
+          <li>ngSwith</li>
+          <li>ngPlural</li>
+          <li>ngTemplate</li>
+          <li>ngComponentOutlet</li>
+        </ul>
+      </li>
+      <li>Componente
+        <ul>
+          <li>Angular (@Componente, @Module)</li>
+          <li>Personalizadas</li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      En este primer acercamineto a las directivas de angular vamos ha hacer un ejemplo con un pequeño formulario deregistro y asi hacemos uso de la 
+      directiva ngIf. En este caso hay dos componente input y un boton cuando se aprite este boton aparecera un mensaje siempre y cuando se apriete el 
+      boton para ello usaremos la directiva ngIf. El boton llamara a una funcion que cambiara el estado de false a true de la vraiable registrado la 
+      cual contiene la directiva ngIf y hara que se muestre o no el mensaje solo en ese caso <code>*ngIf="registrado"</code>, <code> *ngFor="let entrada of entradas"</code>.
+      Si queires que una porcion de codigo no se carge al iniciar la aplicacion porque el usuario deba hacer algunas cosas antes o por los motivos 
+      que sea se usa la siguiente porcion de codigo: <code>ng-template</code> como etiqueta.
+    </p>
+    <h6>REGISTRO DE USUARIO</h6>
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="floatingInput" [(ngModel)]="nombre">
+    </div>
+    <div class="form-floating">
+      <input type="text" class="form-control" id="floatingPassword" [(ngModel)]="apellido">
+    </div>
+    <button id="btnRegistro" type="submit" class="btn btn-primary" (click)="registrarUsuario()">Registro</button><br><br>
+    <!--con ngIf aparecera el mensaje si se pulsa el boton-->
+    <p *ngIf="registrado; else sinRegistrar">{{mensaje}} con el nombre de {{nombre}} {{apellido}}</p>
+    <!--ng-template sirve para que no se carge nada mas inicializar la aplicacion, usamos el else para 
+    hacer que se ejecute el ng-template en caso de que no haya nadie registrado y queramos que ese template si que aparezca-->
+    <ng-template #sinRegistrar>
+      <p>Nadie registrado</p>
+    </ng-template>
+    <p>Uso del ngFor para recorrer un array de objetos: </p>
+    <ul>
+      <li *ngFor="let entrada of entradas; let i=index"> {{i+1}} - {{entrada.titulo}}</li>
+    </ul>
+    <h5>PRACTICA DE DIRECTIVAS</h5>
+    <p>En la siguiente practica creamos un objeto de tipo empleado tendra cuatro propiedades (nombre, apellido, cargo y salario) y deberemos 
+      insertar a traves de un formulario estas propiedades, despues pulsar un boton hacer que aparezca debajo y asi agregar todos los empleados que
+      queramos. 
+    </p>
+    <div>
+      <form class="form-group row">
+        <div class="form-group col-md-3">
+          <label for="nombre">Nombre:</label>
+          <input type="text" name="nombre" id="nombre" placeholder="Nombre" class="form-control" [(ngModel)]="cuadroNombre">    
+        </div>
+        <div class="form-group col-md-3">
+          <label for="apellido">Apellido:</label>
+          <input type="text" name="apellido" id="apellido" placeholder="Apellido" class="form-control" [(ngModel)]="cuadroApellido">    
+        </div>
+        <div class="form-group col-md-3">
+          <label for="cargo">Cargo:</label>
+          <input type="text" name="cargo" id="cargo" placeholder="Cargo" class="form-control" [(ngModel)]="cuadroCargo">    
+        </div>
+        <div class="form-group col-md-3">
+          <label for="salario">Salario:</label>
+          <input type="text" name="salario" id="salario" placeholder="Salario" class="form-control" [(ngModel)]="cuadroSalario">    
+        </div>
+        <div class="col">
+          <br>
+          <button type="submit" class="btn btn-primary" (click)="agregarEmpleado()">Agregar</button>    
+        </div>
+      </form>
+    </div>
+    <br>
+    <div>
+      <div class="row">
+          <div class="col">
+            <div *ngFor="let empleado of empleados; let i=index">
+              {{i+1}} - {{empleado.nombre}} {{empleado.apellido}} {{empleado.cargo}} {{empleado.salario}}
+            </div>    
+          </div>
+      </div>
+    </div>
+    <div>
+      <p>En este apartado vamos a ver las directivas de atributo ngStyle y ngClass. Para hacerlo nos trasladaremos al formulario 
+        registro de usuario.
+      </p>
+    </div>
+
     <br>
   </div>
 

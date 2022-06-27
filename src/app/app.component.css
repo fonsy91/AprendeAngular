@@ -57,6 +57,20 @@ table {
 	margin-left: 10px;
 }
 
+#floatingInput{
+	height: 5px;
+	width: 260px;
+}
+
+#floatingPassword{
+	height: 5px;
+	width: 260px;
+}
+
+#btnRegistro{
+	margin-top: 13px;
+	width: 260px;
+}
 
 td, th {
 	border: 1px solid #ccc;
