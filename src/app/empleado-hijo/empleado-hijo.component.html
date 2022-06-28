@@ -1,0 +1,16 @@
+<div>
+    <div class="row">
+        <div class="col">
+          <div>
+            {{indice+1}} - {{empleadoDeLista.nombre}} {{empleadoDeLista.apellido}} {{empleadoDeLista.cargo}} {{empleadoDeLista.salario}}
+          </div> 
+          <!--Agregamos el componente hijo de este que a su vez es nieto del app.componente-->
+          <app-caracteristicas-nieto (caracteristicasEmpelados)="agregarCaracteristica($event)"></app-caracteristicas-nieto>
+          <ul style="list-style: none;">
+            <li *ngFor="let caracteristica of arrayCaracteristicas">{{caracteristica}}</li>
+          </ul>
+        </div>
+    </div>
+  </div>
+
+

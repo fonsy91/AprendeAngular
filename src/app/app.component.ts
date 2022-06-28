@@ -66,15 +66,13 @@ export class AppComponent {
   registrado=false;
   nombre:string="";
   apellido:string="";
-  
+  cargo:string="";
 
   registrarUsuario(){
     //Cuando se pulsa el boton se cambia a true 
     this.registrado=true;
     this.mensaje="Usuario Registrado con Exito";
   }
-
-  
 
 
 }

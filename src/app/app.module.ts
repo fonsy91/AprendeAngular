@@ -9,11 +9,13 @@ import { AppComponent } from './app.component';
 //Componentes creados por mi
 import { EmpleadosComponent } from './Empleados/empleados.component';
 import { EmpleadoComponent } from './empleado/empleado.component';
+import { EmpleadoHijoComponent } from './empleado-hijo/empleado-hijo.component';
+import { CaracteristicasNietoComponent } from './caracteristicas-nieto/caracteristicas-nieto.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent, EmpleadosComponent, EmpleadoComponent
+    AppComponent, EmpleadosComponent, EmpleadoComponent, EmpleadoHijoComponent, CaracteristicasNietoComponent
   ],
   imports: [
     BrowserModule,

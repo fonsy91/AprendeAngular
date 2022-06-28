@@ -24,6 +24,8 @@
       <li>Event Binding</li>
       <li>Mini Calculadora</li>
       <li>Directivas</li>
+      <li>Comunicación entre componentes</li>
+      <li>Servicios</li>
       <li>...</li>
     </ol>
     <br>
@@ -217,14 +219,18 @@
     </p>
     <h6>REGISTRO DE USUARIO</h6>
     <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="floatingInput" [(ngModel)]="nombre">
+      <input type="text" class="form-control" id="floatingInput" name="nombre" placeholder="Nombre Usuario" [(ngModel)]="nombre">
     </div>
     <div class="form-floating">
-      <input type="text" class="form-control" id="floatingPassword" [(ngModel)]="apellido">
+      <input type="text" class="form-control" id="floatingPassword" name="apellido" [(ngModel)]="apellido">
+    </div>
+    <br>
+    <div class="form-floating">
+      <input type="text" class="form-control" id="floatingInput" name="cargo" [(ngModel)]="cargo">
     </div>
     <button id="btnRegistro" type="submit" class="btn btn-primary" (click)="registrarUsuario()">Registro</button><br><br>
     <!--con ngIf aparecera el mensaje si se pulsa el boton-->
-    <p *ngIf="registrado; else sinRegistrar">{{mensaje}} con el nombre de {{nombre}} {{apellido}}</p>
+    <p *ngIf="registrado; else sinRegistrar">{{mensaje}} con el nombre de {{nombre}} {{apellido}} y tiene el cargo de <span [ngStyle]="{color:cargo=='director' ? 'red' : 'black'}">{{cargo}}</span></p>
     <!--ng-template sirve para que no se carge nada mas inicializar la aplicacion, usamos el else para 
     hacer que se ejecute el ng-template en caso de que no haya nadie registrado y queramos que ese template si que aparezca-->
     <ng-template #sinRegistrar>
@@ -273,14 +279,91 @@
           </div>
       </div>
     </div>
+    <br>
     <div>
       <p>En este apartado vamos a ver las directivas de atributo ngStyle y ngClass. Para hacerlo nos trasladaremos al formulario 
-        registro de usuario.
+        registro de usuario. la directiva ngStyle sirve para dar estilo a un resultado en la aplicacion haciendo uso de condicionales como se 
+        puede apreciar en la linea 231 del codigo apartado de registro de usuarios. En el caso de ngClass es lo mismo pero para a la hora de hacer 
+        mas estilos para ese condicional es poder hacerlo en otro archivo.
       </p>
     </div>
-
-    <br>
   </div>
+  <div>
+    <h4>8. COMUNICACIÓN ENTRE COMPONENTES</h4>
+    <p>
+      Como vimos en su momento angular estaba compuesto por componentes estos tenian se podian incluir unos dentro de otro desde
+      uno que es el raiz bueno pues puede existir la comunicacion entre padres e hijos gracias a los decoradores <code>@Input() y @Output()</code> 
+      el primero transimte comunicacion de padre a hijo y el segundo de hijo a padre. Para ver esta comunicacion haremos uso del formulario 
+      practica de directivas visto en el punto siete. Lo que queremos hacer es dejar el formulario donde esta y los nombres que aparecen en 
+      pantalla segun los vamos agregando que aparezcan en un componente hijo.  
+    </p>
+    <p>Componente hijo (empleado-hijo) y el resultado:</p>
+    <app-empleado-hijo *ngFor="let empleado of empleados; let i=index" [empleadoDeLista]="empleado" [indice]="i"></app-empleado-hijo>
+    <br>
+    <p>Hemos creado un componente lo hemos incrustado en el componente padre app.component le hemos pasado la directiva ngFor y hemos identificado
+      cada una de las variables que no reconoce para usar un Input en la clase .ts del hijo y usado en su propio html. La declaracion de los input se indica abajo
+      <br> 
+      Para decirle a Angular que las variables no sean extricatamente inicializables en el archivo tsconfig.json se debe agregar "strictPropertyInitialization": false;
+      justo debajo de "compilerOptions".
+    </p>
+    <textarea name="" id="" cols="130" rows="4">
+      <app-empleado-hijo *ngFor="let empleado of empleados; let i=index" [empleadoDeLista]="empleado" [indice]="i"></app-empleado-hijo>
+      -Declaracion de Input() en el componente hijo:
+      @Input() empleadoDeLista:Empleado;
+      @Input() indice:number;
+    </textarea>
+    <br>
+    <p>
+      Hemos visto como se comunican los componentes de padres a hijos ahora veremos la comunicacion inversa de hijos a padres, para ello crearemos 
+      otro componente el cual introduciremos en el hijo (abuelo:app.componete padre:empelado-hijo nieto/hijo de padre:) haremos que se agregen caracteristicas 
+      del hijo/nieto al padre con Output y que debajo de cada empleado aparezcan estas caracteristicas. 
+      <br>Componente nieto/hijo:
+      <br>
+      <textarea name="" id="" cols="130" rows="10">
+        //EventEmitter<string>() indica que el flujo de datos del hijo al padre sera de tipo string 
+        //y con el new le dice a angular que se va a crear un nuevo evento y se emitiran datos de tipos string 
+        @Output() caracteristicasEmpelados = new EventEmitter<string>();
+
+        //Funcion que agrega las caracteristicas 
+        agregarCaracteristicas(value:string){
+          this.caracteristicasEmpelados.emit(value);
+        }
+
+        <label>Caracteristica: </label>
+        <input type="text" #nuevaCaracteristica>
+        <button (click)="agregarCaracteristicas(nuevaCaracteristica.value)" class="btn btn-primary btn-sm" style="margin-left: 5px;">Añadir caracteristica</button
+      </textarea>
+      <br>
+      Componente padre:
+      <br>
+      <textarea name="" id="" cols="130" rows="10">
+        //Con esto le decimos al hijo que va a recibir dos datos del componente padre 
+        @Input() empleadoDeLista:Empleado;
+        @Input() indice:number;
+      
+        //Array donde se almacenaran las caracteristicas 
+        arrayCaracteristicas=[''];  
+      
+        //Funcion que agrega las caracteristicas al array
+        agregarCaracteristica(nuevaCaracteristica:string){
+          this.arrayCaracteristicas.push(nuevaCaracteristica);
+        }
+
+         <!--Agregamos el componente hijo de este que a su vez es nieto del app.componente-->
+         <app-caracteristicas-nieto (caracteristicasEmpelados)="agregarCaracteristica($event)"></app-caracteristicas-nieto>
+         <ul style="list-style: none;">
+           <li *ngFor="let caracteristica of arrayCaracteristicas">"caracteristica"</li>
+         </ul>
+      </textarea>
+    </p>
+  </div>
+  <div>
+    <h4>8. SERVICIOS</h4>
+    <p>
+      Como 
+    </p>
+  </div>
+
 
 </body>
 </html>
