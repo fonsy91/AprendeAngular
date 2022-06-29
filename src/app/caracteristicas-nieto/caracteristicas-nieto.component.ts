@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ServicioEmpleadosService } from '../servicio-empleados.service';
 
 @Component({
   selector: 'app-caracteristicas-nieto',
@@ -11,13 +12,16 @@ export class CaracteristicasNietoComponent implements OnInit {
   //y con el new le dice a angular que se va a crear un nuevo evento y se emitiran datos de tipos string 
   @Output() caracteristicasEmpelados = new EventEmitter<string>();
 
-  constructor() { }
+  constructor(private miServicio:ServicioEmpleadosService) { 
+
+  }
 
   ngOnInit(): void {
   }
 
   //Funcion que agrega las caracteristicas 
   agregarCaracteristicas(value:string){
+    this.miServicio.muestraMensaje(value);
     this.caracteristicasEmpelados.emit(value);
   }
 

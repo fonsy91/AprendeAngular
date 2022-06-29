@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  
+    <!---COMIENZO DE LA APLICACION-->
+    <h1>APRENDE ANGULAR</h1>
+    <br>
+    <div>
+      <h4>0. INTRODUCCION</h4>
+      <p>
+      En este curso de Angular veremos desde los conceptos mas basicos hasta un nivel avanzado. Este curso ha sido difundido desde 
+      la siguiente pagina web <a href="https://www.youtube.com/watch?v=FfqLD0Yoxu0&list=PLU8oAlHdN5BnNAe8zXnuBNzKID39DUwcO&index=3&ab_channel=pildorasinformaticas" target="_blank"> Curso Angular</a> 
+      La página donde hago los diagramas y dibujos es la siguiente: <a href="https://www.diagrams.net/" target="_blank">Diagramas</a>. A continuacion 
+      se muestran los temas a tratar: 
+      </p>
+      <ol>
+        <li>Estructura y modificacion de la App.</li>
+        <li><a href="#apartado1">Componentes.</a></li>
+        <li>Iterpolación.</li>
+        <li>Propiedad Binding</li>
+        <li>Event Binding</li>
+        <li>Mini Calculadora</li>
+        <li>Directivas</li>
+        <li>Comunicación entre componentes</li>
+        <li>Servicios</li>
+        <li>Routing</li>
+        <li>...</li>
+      </ol>
+      <br>
+    </div>
+    <div>
+      <h4>1. ESTRUCTURA Y MODIFICACION DE LA APP.</h4>
+      <p>
+        La diferencia entre una pagina web convencional y una single page application (SPA) estriba en que la primera esta haciendo peticiones 
+        al servidor continuamente cada vez que queremos ver una imagen se le hace una peticion al servidor y este nos devuelve otro html con esa
+        imagen, en cambio para una SPA esto no es asi esta realiza una sola peticion al arranque de la aplicacion. El cliente va modificando 
+        cosas en la aplicacion y van apareciendo otras esto se hace gracias a la tecnologia AJAX es decir cada vez que el usuario realiza una 
+        accion se envia una peticion al servidor y este nos responde con un documento JSON se usa para intercambiar datos entre el cliente y el servidor
+        podemos apreciarlo en la imagen de la izquierda.
+      </p>
+      <p>
+        <img id="img1" src="../assets/imagen1.png"> 
+        <img id="img2" src="../assets/imagen2.png">  
+      </p>
+      <p>
+        A continuacion vemos el modulo raiz app.module.ts y dentro se define el componente principal a cargar AppComponet. 
+        En la parte de declarations se importaran o agregaran los componentes que van a existir en este modulo principal, en 
+        la parte de imports se agregaran las librerias que queramos importar de Angular junto con el AppRoutingModule como podemos 
+        ver en la imagen de abajo a la izquierda, en la de la derecha vemos el componente AppComponent el cual va dentro del raiz este 
+        componente esta compuesto por un selector 'app-root', el templateUrl que es el html de este mismo componente junto con el 
+        styleUrls que es la pagina de estilos de este componente.
+        El decorador de este componente lo identificamos con @Component. Se puede observar que hay una parte llamada export class
+        AppComponent vemos que hay una propiedad title la cual usamos despues en el documento del html del componente se pueden 
+        crear mas propiedades 
+      </p>
+      <br>
+    </div>
+    <div>
+      <img id="img3" src="../assets/imagen3.png">
+      <img id="img4" src="../assets/imagen4.png">
+      <br><br>
+    </div>
+    <a name="apartado1" id="apartado1"></a>
+    <div>
+      <h4>2. COMPONENTES EN ANGULAR.</h4>
+      <p>
+        Los componentes se pueden crear manualmente o automaticamente a partir del CLI. Una vez que creas
+        un componente es necesario registrarlo en la aplicacion dentro del archivo app.module.ts agregamos
+        dentro del apartado declarations el nombre de la clase del nuevo componente ademas de importar 
+        el componente con import.
+      </p>
+      <!--Agregamos el componente Empleados-->
+      <!--<app-empleados></app-empleados>-->
+      <!--Seguimos con nuestro componente principal-->
+      <p>
+        Muchas veces cuando creamos un componente Angular nos crea los tres archivos primordiales html, ts y css pero algunas 
+        veces el codigo del ts y css son muy pequeños y no queremos esos archivos para algo tan minusculo es por ello
+        que podemos hacerlo inline para ello debemos ir al archivo ts del componente omitir la linea de css o ts del @Componet 
+        y cambiamos el codigo styleUrls: ['./empleado.component.css'] por styles:[""] igual que en la programacion web que puedes 
+        hacer estilos en la misma pagina o en un archivo aparte y de la misma manera lo hariamos para la parte del html. Si quieres 
+        que al crear un componente mediante CLI haga todo esto que acabamos de comentar se deberia crear de la siguiente manera:
+        ng g c nombreComponeten -s -t
+      </p>
+      <!--
+      <app-empleado></app-empleado>
+      <app-empleado></app-empleado>
+      -->
+      <br>
+    </div>
+    <div>
+      <h4>3. INTERPOLACIÓN.</h4>
+      <p>
+        Cuando hablamos de interpolacion nos referimos a la incrustacion de expresiones en el docuemnto html a partir de las llaves dobles <code>{{</code><code>}}</code>
+        en la interpolacion tambien podemos interactuar con las variables que mostramos en el caso de los int podemos sumar, restar etc... todo tipo de operaciones
+        ,expresiones y operadores que existen en typescript. Los campos a los que accedemos tambien pueden estar protegidos en el caso de que no queramos que se accedan 
+        desde otras clases como ocurre en otro lenguajes orientados a objetos, ademas tambien podemos usar el operador ternario '?' para realizar una condicion 
+        de la siguiente manera condicion ? valor si verdad: si falso <br> <code>{{<var>edad</var><=18 ? "Menor de edad":"Mayor de edad"}}</code> 
+      </p>
+      <app-empleados></app-empleados>
+      <br>
+    </div>
+    <div>
+      <h4>4. PROPERTY BINDING.</h4>
+      <p>
+        Binding es poder hacer una union entre una propiedad de la parte logica con un elemento del html ya sea un cuadro de texto, una frase, 
+        un input, un boton etc.. en este caso tenemos deshabilitado el campo de introducir una empresa con la propiedad de disabled si creamos una 
+        variable como pude ser <code>habilitaCuadro=true;</code> en nuestra parte logica y queremos cambiar indistintamente de true a false esta propiedad dependiendo
+        de los factores que sean como por ejemplo que algunos usuarios no tienen acceso a ese campo pues mediante un if y esta propiedad podemos hacer 
+        que se habilite o no, en el html se realiza de la siguiente manera: <code>[disabled]="habilitaCuadro"</code>, En el aso del boton esta deshabilitado ya que 
+        hemos usado esta misma tecnica para cancelarlo por el momento. 
+      </p>
+      <div>
+        <img id="img5" src="../assets/imagen5.png">
+      </div>
+      <br>
+      <p>
+        Otro ejemplo con otro elemento de html un checkbox con esto haremos que cuando arranque la aplicacion este elemento este o no este activado 
+        dependiendo de la funcion <code>cambiaCheck()</code> si la tenemos a true o a false implementada en la el .ts. Podemos ver si esto es cierto o no 
+        mirando el checkbox que se situa al final de Empleados de la Empresa en el apartado registrado 
+      </p>
+      <br>
+    </div>
+    <div>
+      <h4>5. EVENT BINDING</h4>
+      <p>
+        Event Binding es como el apartado anterior pero en ambos sentidos desde el componente html al .ts y viceversa para ver un primer ejemplo 
+        realizaremos un ejemplo sencillo que al pulsar el checkbox aparezca una ventana emergente indicandonos que un usuario se ha registrado, esto 
+        servira de ejemplo para poder entender como funciona el event binding para ello realizaremos un funcion que muestre esa ventana emergente. 
+        Tambien podemos capturar el objeto event que ocurre y que nadie ve ($event) pasandoselo a la funcion y poder tratarlo en .ts  
+      </p>
+      <h6>MAS PRACTICAS CON EVENT BINDING</h6>
+      <p>
+        Aqui mostraremos algunas practicas mas sobre eventos binding a partir de la documentación de angular y lo existente en internet algunas 
+        paginas donde podemos ver los eventos y ejemplos practicos serian las siguientes: <a href="https://www.w3schools.com/jsref/dom_obj_event.asp" target="_blank">Eventos1,</a>
+        <a href="http://www.w3bai.com/es/angular/angular_events.html" target="_blank"> Eventos2</a>
+      </p>
+      <br>
+    </div>
+    <div>
+      <h4>5. BINDING BIDIRECCIONAL</h4>
+      <p>
+        Como vimos anteriormente en las explicaciones de la propiedad binding en ese caso cuando cambiabas una propiedad en el .ts esta se modificaba 
+        en el html esto implicaba una sola direccion, y en el event binding se hacia lo mismo pero atrapando el evento y a traves de una funcion 
+        cuando el usuario interactuaba con la aplicacion o el tempalte eso tenia reflejo en el .ts ejecutandose dicha funcion en este caso el flujo es
+        contrario al del binding, cuando el flujo va tanto de un lado para otro se llama binding bidireccional o two way binding, esto nos permite 
+        actualizaciones continuas es decir modificar cosas en nel .ts a partir de accione en html y estas .ts se modifican al instante en el html otra vez.
+        Para poder hacer todo esto necesitamos: la directiva ngModel y el uso de Banana in Box que es una sintaxis si recordais para el property banding 
+        usabamos [] para el flujo .ts hacia html y para el event binding () flujo de html a .ts, para este caso que queremos que sea bidireccional tendremos 
+        que suar ambos simbolos [()].
+        El ejemplo ilustrativo se veria en la parte superior donde usamos todos los tipos de bindings. Como podemos ver en el campo de testo aparece 
+        el nombre de Google esto es debido a que al usar el ngModel <code>[(ngModel)]="empresa2" </code> viaja del .ts al html y cuando escribo ocurre de forma diferente.
+        Para poder usar todo esto en angular es necesario importarlo en el modulo principal app.module.ts en el apartado de imports FormaModule.  
+      </p>
+      <br>
+    </div>
+    <div>
+      <h4>6. MINI CALCULADORA</h4>
+      <p>
+        Esta aplicacion realizara calculos basicos como la suma la resta, existen dos cuadros de texto para mabos valores a operar, tambien exitiran botones 
+        de operacion el resultado lo mostramos por pantalla, ademas esta aplicacion usara Binding bidireccional. Para el uso de bootstrap en la aplicacion en este 
+        caso no lo hemos instalado en el proyecto ha sido introducido via CDN insertando las isguientes lineas en el index.html del proyecto: 
+      </p>
+      <textarea name="" id="" cols="190" rows="2.5">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+      </textarea>
+      <br><br>
+      <form action="">
+        <!--Hay que especificar el name en el input junto con el ngMmodel para que haya ambas direcciones-->
+        Numero 1: <input type="number" [(ngModel)]="numero1" name="numero1"><br><br>
+        Numero 2: <input type="number" [(ngModel)]="numero2" name="numero2"><br><br>
+        Resultado: {{resultado}} <br><br>
+        <!--Para poder enviar la informacion de este formulario un input submit-->
+        <input id="inputSuma" type="submit" value="sumar" (click)="sumar()" class="btn btn-primary">
+        <input id="inputResta" type="submit" value="restar" (click)="restar()" class="btn btn-primary">
+      </form>
+      <br>
+    </div>
+    <div>
+      <h4>7. DIRECTIVAS</h4>
+      <p>
+        Son elementos que se aplican a etiquetas HTML y añaden funcionalidad, sirven para modificar la estructura del DOM (document Objet model)
+        podras agreagr y quitar elementos de nuestra pagina web agreagr o qutar parafos, imagenes depeniendo de ciertas acciones que vayan 
+        haciendo los usuarios hay tres tipos de directivas en angular pueden ser:
+      </p>
+      <ul>
+        <li>Atributo
+          <ul>
+            <li>ngClass</li>
+            <li>ngStyle</li>
+            <li>ngModel</li>
+          </ul>
+        </li>
+        <li>Estructural 
+          <ul>
+            <li>ngIf</li>
+            <li>ngFor</li>
+            <li>ngSwith</li>
+            <li>ngPlural</li>
+            <li>ngTemplate</li>
+            <li>ngComponentOutlet</li>
+          </ul>
+        </li>
+        <li>Componente
+          <ul>
+            <li>Angular (@Componente, @Module)</li>
+            <li>Personalizadas</li>
+          </ul>
+        </li>
+      </ul>
+      <p>
+        En este primer acercamineto a las directivas de angular vamos ha hacer un ejemplo con un pequeño formulario deregistro y asi hacemos uso de la 
+        directiva ngIf. En este caso hay dos componente input y un boton cuando se aprite este boton aparecera un mensaje siempre y cuando se apriete el 
+        boton para ello usaremos la directiva ngIf. El boton llamara a una funcion que cambiara el estado de false a true de la vraiable registrado la 
+        cual contiene la directiva ngIf y hara que se muestre o no el mensaje solo en ese caso <code>*ngIf="registrado"</code>, <code> *ngFor="let entrada of entradas"</code>.
+        Si queires que una porcion de codigo no se carge al iniciar la aplicacion porque el usuario deba hacer algunas cosas antes o por los motivos 
+        que sea se usa la siguiente porcion de codigo: <code>ng-template</code> como etiqueta.
+      </p>
+      <h6>REGISTRO DE USUARIO</h6>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" name="nombre" placeholder="Nombre Usuario" [(ngModel)]="nombre">
+      </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="floatingPassword" name="apellido" [(ngModel)]="apellido">
+      </div>
+      <br>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="floatingInput" name="cargo" [(ngModel)]="cargo">
+      </div>
+      <button id="btnRegistro" type="submit" class="btn btn-primary" (click)="registrarUsuario()">Registro</button><br><br>
+      <!--con ngIf aparecera el mensaje si se pulsa el boton-->
+      <p *ngIf="registrado; else sinRegistrar">{{mensaje}} con el nombre de {{nombre}} {{apellido}} y tiene el cargo de <span [ngStyle]="{color:cargo=='director' ? 'red' : 'black'}">{{cargo}}</span></p>
+      <!--ng-template sirve para que no se carge nada mas inicializar la aplicacion, usamos el else para 
+      hacer que se ejecute el ng-template en caso de que no haya nadie registrado y queramos que ese template si que aparezca-->
+      <ng-template #sinRegistrar>
+        <p>Nadie registrado</p>
+      </ng-template>
+      <p>Uso del ngFor para recorrer un array de objetos: </p>
+      <ul>
+        <li *ngFor="let entrada of entradas; let i=index"> {{i+1}} - {{entrada.titulo}}</li>
+      </ul>
+      <h5>PRACTICA DE DIRECTIVAS</h5>
+      <p>En la siguiente practica creamos un objeto de tipo empleado tendra cuatro propiedades (nombre, apellido, cargo y salario) y deberemos 
+        insertar a traves de un formulario estas propiedades, despues pulsar un boton hacer que aparezca debajo y asi agregar todos los empleados que
+        queramos. 
+      </p>
+      <div>
+        <form class="form-group row">
+          <div class="form-group col-md-3">
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" id="nombre" placeholder="Nombre" class="form-control" [(ngModel)]="cuadroNombre">    
+          </div>
+          <div class="form-group col-md-3">
+            <label for="apellido">Apellido:</label>
+            <input type="text" name="apellido" id="apellido" placeholder="Apellido" class="form-control" [(ngModel)]="cuadroApellido">    
+          </div>
+          <div class="form-group col-md-3">
+            <label for="cargo">Cargo:</label>
+            <input type="text" name="cargo" id="cargo" placeholder="Cargo" class="form-control" [(ngModel)]="cuadroCargo">    
+          </div>
+          <div class="form-group col-md-3">
+            <label for="salario">Salario:</label>
+            <input type="text" name="salario" id="salario" placeholder="Salario" class="form-control" [(ngModel)]="cuadroSalario">    
+          </div>
+          <div class="col">
+            <br>
+            <button type="submit" class="btn btn-primary" (click)="agregarEmpleado()">Agregar</button>    
+          </div>
+        </form>
+      </div>
+      <br>
+      <div>
+        <div class="row">
+            <div class="col">
+              <div *ngFor="let empleado of empleados; let i=index">
+                {{i+1}} - {{empleado.nombre}} {{empleado.apellido}} {{empleado.cargo}} {{empleado.salario}}
+              </div>    
+            </div>
+        </div>
+      </div>
+      <br>
+      <div>
+        <p>En este apartado vamos a ver las directivas de atributo ngStyle y ngClass. Para hacerlo nos trasladaremos al formulario 
+          registro de usuario. la directiva ngStyle sirve para dar estilo a un resultado en la aplicacion haciendo uso de condicionales como se 
+          puede apreciar en la linea 231 del codigo apartado de registro de usuarios. En el caso de ngClass es lo mismo pero para a la hora de hacer 
+          mas estilos para ese condicional es poder hacerlo en otro archivo.
+        </p>
+      </div>
+    </div>
+    <div>
+      <h4>8. COMUNICACIÓN ENTRE COMPONENTES</h4>
+      <p>
+        Como vimos en su momento angular estaba compuesto por componentes estos tenian se podian incluir unos dentro de otro desde
+        uno que es el raiz bueno pues puede existir la comunicacion entre padres e hijos gracias a los decoradores <code>@Input() y @Output()</code> 
+        el primero transimte comunicacion de padre a hijo y el segundo de hijo a padre. Para ver esta comunicacion haremos uso del formulario 
+        practica de directivas visto en el punto siete. Lo que queremos hacer es dejar el formulario donde esta y los nombres que aparecen en 
+        pantalla segun los vamos agregando que aparezcan en un componente hijo.  
+      </p>
+      <p>Componente hijo (empleado-hijo) y el resultado:</p>
+      <app-empleado-hijo *ngFor="let empleado of empleados; let i=index" [empleadoDeLista]="empleado" [indice]="i"></app-empleado-hijo>
+      <br>
+      <p>Hemos creado un componente lo hemos incrustado en el componente padre app.component le hemos pasado la directiva ngFor y hemos identificado
+        cada una de las variables que no reconoce para usar un Input en la clase .ts del hijo y usado en su propio html. La declaracion de los input se indica abajo
+        <br> 
+        Para decirle a Angular que las variables no sean extricatamente inicializables en el archivo tsconfig.json se debe agregar "strictPropertyInitialization": false;
+        justo debajo de "compilerOptions".
+      </p>
+      <textarea name="" id="" cols="130" rows="4">
+        <app-empleado-hijo *ngFor="let empleado of empleados; let i=index" [empleadoDeLista]="empleado" [indice]="i"></app-empleado-hijo>
+        -Declaracion de Input() en el componente hijo:
+        @Input() empleadoDeLista:Empleado;
+        @Input() indice:number;
+      </textarea>
+      <br>
+      <p>
+        Hemos visto como se comunican los componentes de padres a hijos ahora veremos la comunicacion inversa de hijos a padres, para ello crearemos 
+        otro componente el cual introduciremos en el hijo (abuelo:app.componete padre:empelado-hijo nieto/hijo de padre:) haremos que se agregen caracteristicas 
+        del hijo/nieto al padre con Output y que debajo de cada empleado aparezcan estas caracteristicas. 
+        <br>Componente nieto/hijo:
+        <br>
+        <textarea name="" id="" cols="130" rows="10">
+          //EventEmitter<string>() indica que el flujo de datos del hijo al padre sera de tipo string 
+          //y con el new le dice a angular que se va a crear un nuevo evento y se emitiran datos de tipos string 
+          @Output() caracteristicasEmpelados = new EventEmitter<string>();
+  
+          //Funcion que agrega las caracteristicas 
+          agregarCaracteristicas(value:string){
+            this.caracteristicasEmpelados.emit(value);
+          }
+  
+          <label>Caracteristica: </label>
+          <input type="text" #nuevaCaracteristica>
+          <button (click)="agregarCaracteristicas(nuevaCaracteristica.value)" class="btn btn-primary btn-sm" style="margin-left: 5px;">Añadir caracteristica</button
+        </textarea>
+        <br>
+        Componente padre:
+        <br>
+        <textarea name="" id="" cols="130" rows="10">
+          //Con esto le decimos al hijo que va a recibir dos datos del componente padre 
+          @Input() empleadoDeLista:Empleado;
+          @Input() indice:number;
+        
+          //Array donde se almacenaran las caracteristicas 
+          arrayCaracteristicas=[''];  
+        
+          //Funcion que agrega las caracteristicas al array
+          agregarCaracteristica(nuevaCaracteristica:string){
+            this.arrayCaracteristicas.push(nuevaCaracteristica);
+          }
+  
+           <!--Agregamos el componente hijo de este que a su vez es nieto del app.componente-->
+           <app-caracteristicas-nieto (caracteristicasEmpelados)="agregarCaracteristica($event)"></app-caracteristicas-nieto>
+           <ul style="list-style: none;">
+             <li *ngFor="let caracteristica of arrayCaracteristicas">"caracteristica"</li>
+           </ul>
+        </textarea>
+      </p>
+    </div>
+    <div>
+      <h4>9. SERVICIOS</h4>
+      <p>
+        Cuando una aplicacion angular esta compuesta de uno mas componentes y uno de ellos necesita hacer uso de unos datos 
+        que por ejemplo vienen de una base de datos y estos datos van a ser usados por uno mas componentes vamos a modular estos datos 
+        para que el componente que quiera usarlos pueda a esto se le llama servicio de esta manera no tienes porque crear un metodo en cada 
+        componente creas un servicio y sera proporcionado a cada componente que lo necesite, para ello crearemos un servicio hipotetico en el que
+        al realizar un registro de una persona (practica de directivas) aparezca una ventana emergente mostrando nombre y apellidos y tambien 
+        cuando se agrege una caracteristica, se inyectara este servicio a dos de los 3 componentes el componente padre y el componente nieto. <br>
+        Una vez creas el servicio ng g s "nombre_servicio" se agrega al app.module.ts en providers. La inyeccion del servicio siempre se hace a traves 
+        del constructor. En resumen es Básicamente un servicio es un proveedor de datos, que mantiene lógica de acceso a ellos y operativa relacionada 
+        con el negocio y las cosas que se hacen con los datos dentro de una aplicación. Los servicios serán consumidos por los componentes, que 
+        delegarán en ellos la responsabilidad de acceder a la información y la realización de operaciones con los datos.
+        Como hemos dicho antes la inyeccion se hace desde el constructor y se pueden realizar las operaciones de ese servicio tanto desde el constructor 
+        como del metodo ngOnInit que es el segundo que se ejecuta una vez se arranca una aplicacion angular. <br>
+        Tambien es posible agregar un servicio dentro de otro para ello hacemos uso de @Injectable() dentro del servicio donde queremos agregar otro servicio 
+        y en el constructor inyectar el otro servicio.
+        <br><br>
+        Inyeccion de servicio: 
+        <br>
+        <textarea name="" id="" cols="130" rows="3">
+          import { ServicioEmpleadosService } from './servicio-empleados.service';
+  
+          constructor(private miServicio:ServicioEmpleadosService){}
+        </textarea>
+      </p>
+    </div>
+    <div>
+      <h4>10. ROUTING</h4>
+      <p>
+        Usaremos un ejemplo practico para el uso de routing creando un navbar el cual consta de una serie de apartados 
+        que son Home y Quines somos usarmos el routing para hacer que cuando se pulse en estos enlaces la aplicacion nos 
+        lleve a una pagina aparte correspondiente a esa seccion cada una de estas secciones corresponde con un componente, lo primero 
+        que hay que hacer es ir al archivo app.module.ts y expecificar lo siguiente:
+        <br><br>
+        <img src="./../assets/imagen6.png" class="img-fluid" alt="">
+        <br><br>
+        <textarea name="" id="" cols="100" rows="10">
+          //Creamos una constante de rutas de aplicacion 
+          const appRoute:Routes=[
+            {path:'', component:HomeComponentComponent},
+            {path:'quienes',component:QuienesComponentComponent}
+          ];
+  
+          imports: [
+            BrowserModule,
+            FormsModule,
+            AppRoutingModule,
+            RouterModule.forRoot(appRoute)
+          ],
+
+          //Gestion de rutas desde el componetne principal
+          <router-outlet></router-outlet>
+        </textarea>
+        <br><br>
+        Una vez hecho lo anterior tendremos que pasar todo lo del componente app.component.html y el .ts al componente home y en el 
+        componente app.component solamente dejar el navbar e indicarle que desde aqui vamos a gestionar las rutas con el selector de rutas 
+        como se indica al final del textarea de arriba. Tambien existe el routing programado con botones o links para moverte pora la rutas 
+        o por ejemplo cuando estas haciendo algo y hay un boton de volver atras. Para un ejemplo simple crearemos un boton que contendra una 
+        funcion la cual nos hara volver al home para realizarlo es necesario inyectar en el contructor el servicio router porque queremos usar 
+        enrutamiento. <br><br>
+        <textarea name="" id="" cols="100" rows="5">
+            constructor(private router:Router) { }
+
+            ngOnInit(): void {
+            }
+
+            volverHome(){
+                this.router.navigate([""]);
+            }
+        </textarea>
+        <br><br>
+        Tambien vamos a realizar un redireccionamineto en el cual crearemos un formulario y en el momento de dar al boton de agregar la 
+        pagina nos llevara al home.
+      </p>
+      <h6>PASAR PARAMETROS A LAS RUTAS.</h6>
+      <p>
+        En este caso queremos hacer que al pulsar sobre el nombre de un usuario desde el componente principal estos datos se pasen como parametro a la ruta 
+        que se dirigira hacia quienes somos y se colocaran en los campos del formulario por si queremos hacer una modificacion. En el nombre del usuario 
+        agregamos una etiqueta <code><a href=""></a></code> y dentro de ella [routerLink]="[/quienes,indice]" esto nos redirigira hacia el apartado quienes somos 
+        y le pasaremos el indice del trabajador como parametro, hay que preparar en el roter de app.module.ts a la ruta para que sepa que le vamos a pasar un indice: <br><br> 
+        <textarea name="" id="" cols="100" rows="1"> {path:'quienes/:id',component:QuienesComponentComponent}</textarea>
+      <br><br>
+      Ahora faltaria agregar un boton modifica y pasarle los datos del trabajador a los campos del formulario, para empezar hay que inyectar en el contructor 
+      de quienes somos el Activate route private route:ActivatedRoute
+      </p>
+      
+      <!--VAMOS POR EL VIDEO 29-->
+    </div>
+  
+    
+  
+  </body>
+</html>

@@ -1,0 +1,87 @@
+body {
+	margin: 80px 150px;
+	padding: 0;
+	font-family: Helvetica, Arial, sans-serif;
+	color: #666;
+	background: #f2f2f2; 
+	
+}
+
+h1 {
+	font-size: 2.3em;
+	line-height: 10px;
+	margin: 15px 0;
+	font-weight: 300;
+}
+
+p {
+	margin: 0 0 1.5em 0;
+    text-align: justify;
+}
+
+#img1{
+    height: 200px;
+    width: 400px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#img2{
+    height: 200px;
+    width: 500px;
+	margin-left: 100px;
+	margin-bottom: 20px;
+}
+
+#img3{
+    height: 250px;
+    width: 400px;
+
+}
+
+#img4{
+    height: 180px;
+    width: 250px;
+	margin-left: 100px;
+	margin-bottom: 20px;
+}
+
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 50%;
+}
+
+#inputResta{
+	margin-left: 10px;
+}
+
+#floatingInput{
+	height: 5px;
+	width: 260px;
+}
+
+#floatingPassword{
+	height: 5px;
+	width: 260px;
+}
+
+#btnRegistro{
+	margin-top: 13px;
+	width: 260px;
+}
+
+td, th {
+	border: 1px solid #ccc;
+	text-align: left;
+	padding: 8px;
+}
+  
+tr:nth-child(even) {
+	background-color: #dddddd;
+}
+
+a{
+	
+	color: #666;
+}

@@ -9,7 +9,7 @@ export class Empleado{
     }
 
     nombre:string="";
-    apellido:String="";
+    apellido:string="";
     cargo:string="";
     salario:number=0;
 }
