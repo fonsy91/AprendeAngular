@@ -30,7 +30,6 @@ export class QuienesComponentComponent implements OnInit {
     this.cuadroApellido=empleado.apellido;
     this.cuadroCargo=empleado.cargo;
     this.cuadroSalario=empleado.salario;
-
   }
 
   //Funcion para agregar un empleado
@@ -48,7 +47,13 @@ export class QuienesComponentComponent implements OnInit {
 
   actualizaEmpleado(){
     let miEmpleado=new Empleado(this.cuadroNombre,this.cuadroApellido,this.cuadroCargo,this.cuadroSalario);
+    //Usamos una funcion del servicio para actualizar un empleado 
     this.miServicio.actualizarEmpleado(this.indice,miEmpleado);
+    this.router.navigate([""]);
+  }
+
+  eliminaEmpleado(){
+    this.miServicio.eliminarEmpleado(this.indice);
     this.router.navigate([""]);
   }
 

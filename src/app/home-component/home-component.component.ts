@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataServices } from '../data.serviceFirebase';
 import { Empleado } from '../empleado.model';
 import { ServicioEmpleadosService } from '../servicio-empleados.service';
 
@@ -11,7 +12,7 @@ export class HomeComponentComponent implements OnInit {
 
   //Constructor de la clase dentro de la logica del componente principal 
   //Ademas tiene inyectado el servicio de empleados.
-  constructor(private miServicio:ServicioEmpleadosService){
+  constructor(private miServicio:ServicioEmpleadosService,private dataServFirebase:DataServices){
     //console.log("Hola tio");
     //this.empleados=this.miServicio.empleados;
 
@@ -24,7 +25,16 @@ export class HomeComponentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.empleados=this.miServicio.empleados;
+    //this.empleados=this.miServicio.empleados;
+    //Ahora lo cargamos desde la base de datos 
+    //console.log(this.dataServFirebase.traerEmpleados());
+    //Nos suscribimos 
+    this.dataServFirebase.traerEmpleados().subscribe(misEmpleados=>{
+      console.log(misEmpleados);
+      //guardamos los datos que nos vienen en el array
+      this.empleados=Object.values(misEmpleados);
+      this.miServicio.setEmpleados(this.empleados);
+    });
   }
 
   //variables para la calculadores 

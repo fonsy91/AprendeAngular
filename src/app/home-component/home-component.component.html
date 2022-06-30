@@ -30,6 +30,8 @@
         <li>Comunicación entre componentes</li>
         <li>Servicios</li>
         <li>Routing</li>
+        <li>Firebase</li>
+        <li>Librerira Rxjs(final)</li>
         <li>...</li>
       </ol>
       <br>
@@ -446,13 +448,82 @@
         <textarea name="" id="" cols="100" rows="1"> {path:'quienes/:id',component:QuienesComponentComponent}</textarea>
       <br><br>
       Ahora faltaria agregar un boton modifica y pasarle los datos del trabajador a los campos del formulario, para empezar hay que inyectar en el contructor 
-      de quienes somos el Activate route private route:ActivatedRoute
+      del componente (quienes somos) el Activate route private route:ActivatedRoute y tambien el servicio que provee datos y contiene las funciones para 
+      trabajar con lo usuarios trabajadores hacemos uso de la funcion OnInit para poder realizar esto como se muestra abajo:
+      <br><br>
+      <textarea name="" id="" cols="100" rows="10">
+        ngOnInit(): void {
+          this.empleados=this.miServicio.empleados;
+          this.indice=this.route.snapshot.params['id'];
+          let empleado:Empleado=this.miServicio.econtrarEmpleado(this.indice);
+          this.cuadroNombre=empleado.nombre;
+          this.cuadroApellido=empleado.apellido;
+          this.cuadroCargo=empleado.cargo;
+          this.cuadroSalario=empleado.salario;
+        }
+
+        actualizaEmpleado(){
+          let miEmpleado=new Empleado(this.cuadroNombre,this.cuadroApellido,this.cuadroCargo,this.cuadroSalario);
+          this.miServicio.actualizarEmpleado(this.indice,miEmpleado);
+          this.router.navigate([""]);
+        }
+      </textarea>
+      <br>
       </p>
-      
-      <!--VAMOS POR EL VIDEO 29-->
+      <h6>RUTA DE ERROR PERSONALIZADA.</h6>
+      <p>
+        En el caso de que exista algun problema o que la ruta este mal la aplicacion te saque una pagina de error, para ello creamos un componente 
+        pagina erronea y lo mas importante es configruar la ruta de esta pagina erronea personalizada en app.module.ts indicando el path con dos 
+        astericos (**) esto indica a angular que si no se dirige o se introducce ninguna de las rutas existentes entonces vaya a esta de los asteriscos 
+      </p>
+    </div>
+    <div>
+      <h4>11. FIREBASE</h4>
+      <p>
+        Es una plataforma en la nube con la cual gestionas datos para el desarrollo de aplicaciones web ofreciendo BBDD en tiempo real desde la nube 
+        no es de tipo SQL ya que almacena los datos en ficheros JSON. ofrece hosting para almacenar datos y despliege de aplicacion en servidor de una 
+        manera sencilla es gratuito hasta una cierta capacidad, te permite identificar a la hora de hacer un login de la forma tradicional y ademas con 
+        sus cuentas en Google,twitter,faceboo, github. Operaciones directas CRUD sin picar codigo, envio de notificaciones a usuarios. La pagina es la siguiente:
+        <a href="https://firebase.google.com/?gclsrc=aw.ds&gclid=CjwKCAjwk_WVBhBZEiwAUHQCmbL6TQwVTpVdywfYHt5GArK6BML7HE9GWKqQqN9DUsaiXDHtORseRRoCD2oQAvD_BwE ">Firebase</a>
+        Una vez registrado y con el proyecto creado en el menu desplegable de la derecha se ven dos tipos de bases de datos: <br><br>
+        <li>Realtime: almacen de datos en arbol JSON, permite ordenar y filtrar consultas pero no ambas a la vez
+          a la hora de agregar datos se debe hacer de manera individula mas barata. 
+        </li>  
+        <li>Firestrore: almacen de datos en documentos organizados en colecciones, para grandes cantidades de datos, si permite ordenar y filtar consultas a la vez
+          se deben agregar datos por lotes, mas cara. 
+        </li>  
+        <br>
+        Despues de ver cada una de las caracteristicas de ambas nosotros eligiremos la Realtime, despues de crear la base de datos te proporcionara una URL 
+        que deberemos usar en el proyecto angular para ello creamos un servicio que en mi caso lo he llamado data.serviceFirebase.ts. Tambien hay que registar 
+        un modulo HttpClientModule para ello en el servicio creado inyectamos este modulo en el constructor y creamos el metodo de agregar un empleado 
+        para ello se usa un observable que veremos mas adelante.
+        <br><br>
+        <textarea name="" id="" cols="130" rows="10">
+          @Injectable()
+          export class DataServices{
+            constructor(private httpClient:HttpClient){
+
+            }
+
+            guardarEmpleados(empleados:Empleado[]){
+            this.httpClient.post('https://mis-clientes-947ad-default-rtdb.europe-west1.firebasedatabase.app/datos.json',empleados).subscribe(
+              response=>console.log("Se han guardado los empleados: ",response),
+              error=>console.log("Error: ",error),
+              );
+            }
+          }
+        </textarea>
+      </p>
+      <h6>OBTENER DATOS DE LA BBDD</h6>
+      <p>
+        Para realizar esta operacion creamos la funcion traerEmpleados usando el metodo get, y despues la llamamos desde el servicio creado 
+        a mano por nosotros servicio-empleados.service.ts con la funcion obtenerEmpleados esto devuelve un observable que son operaciones asincoranas 
+        para actualizar los datos automaticamente sin tener que hacer consultas repetitivas, es decir en segundo plano actualziara en nuestra aplicacion 
+        la informacion que hay en la base de datos.  
+      </p>
     </div>
   
-    
+    <!--Vamos por el video 39 del curso-->
   
   </body>
 </html>
